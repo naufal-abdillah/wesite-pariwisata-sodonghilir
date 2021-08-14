@@ -32,6 +32,12 @@ if (isset($_GET['t_id'])) {
     <link rel="stylesheet" href="../assets/owlcarousel/assets/owl.carousel.min.css">
     <link rel="stylesheet" href="../assets/owlcarousel/assets/owl.theme.default.min.css">
     <link rel="stylesheet" href="temp.css">
+    <!-- Blog Syle -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+    integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <!-- <link href="https://fonts.googleapis.com/css?family=Candal|Lora" rel="stylesheet"> -->
+    <!-- Custom Styling -->
+    <link rel="stylesheet" href="assets/css/newstyle.css">
 
     <!-- javascript -->
     <script src="../assets/vendors/jquery.min.js"></script>
@@ -47,7 +53,7 @@ if (isset($_GET['t_id'])) {
                     <li class="nav-item"><a class="nav-link active" href="#tentang-sodonghilir">Tentang Sodonghilir</a></li>
                     <!-- <li class="nav-item"><a class="nav-link" href="pricing.html">Wisata</a></li> -->
                     <li class="nav-item"><a class="nav-link" href="#review">Review</a></li>
-                    <li class="nav-item"><a class="nav-link" href="blog-list.html">Blog Post</a></li>
+                    <li class="nav-item"><a class="nav-link" href="blog-list.php">Blog Post</a></li>
                     <!-- <li class="nav-item"><a class="nav-link" href="contact-us.html">Kontak</a></li> -->
                 </ul>
             </div>
@@ -201,68 +207,33 @@ if (isset($_GET['t_id'])) {
         <!-- <section></section> -->
         
         <!-- Artikel Terbaru -->
-        <section class="clean-block clean-info dark" id="Artikel-Terbaru">
-          <div class="container">
-              <div class="row align-items-center">
-                  
-                  <div class="col-md-6">
-                      <h3>Artikel Terbaru</h3>
-                      <div class="getting-started-info">
-                          <p>Sodonghilir, Tasikmalaya memiliki banyak pesona tersembunyi di dalamnya. Telusuri lebih lanjut dan rasakan serunya petualangan di Sodonghilir!</p>
-                      </div>
-                      <a href="blog-list.html"><button class="btn btn-outline-primary btn-lg" type="button">Selengkapnya</button></a>
-                    </div>
-                      <div class="block-heading"><p></p></div>
-                      
-                      <div class="col-md-6">
-                        <div class="carousel slide" data-ride="carousel" id="carousel-1">
-                          <div class="carousel-inner">
-                              <div class="carousel-item active"><a href="https://www.google.com/";">
-                                <img class="w-100 d-block" src="assets/img/scenery/image1.jpg" alt="Slide Image" ></a>
-                                  <div class="carousel-caption d-none d-md-block">
-                                      <h5 style="color: black;">First slide label</h5>
-                                      <p>Some representative placeholder content for the first slide.</p>
-                                  </div>
-                              </div>
-                              
-                              <div class="carousel-item"><a href="https://www.google.com/" >
-                                <img class="w-100 d-block" src="assets/img/scenery/image4.jpg" alt="Slide Image" ></a>
-                                <div class="carousel-caption d-none d-md-block">
-                                  <h5 style="color: black;">First slide label</h5>
-                                  <p>Some representative placeholder content for the first slide.</p>
-                                </div>
-                              </div>
-                              <a href="https://www.google.com/">
-                                <div class="carousel-item"><a href="https://www.google.com/">
-                                  <img class="w-100 d-block" src="assets/img/scenery/image6.jpg" alt="Slide Image"></a>
-                                  <div class="carousel-caption d-none d-md-block">
-                                    <h5 style="color: black;">First slide label</h5>
-                                    <p>Some representative placeholder content for the first slide.</p>
-                                  </div>
-                                </div>
-                              </a>
-                              <div class="carousel-item"><a href="https://www.google.com/">
-                                <img class="w-100 d-block" src="assets/img/scenery/image6.jpg" alt="Slide Image"></a>
-                                <div class="carousel-caption d-none d-md-block">
-                                  <h5 style="color: black;bac">First slide label</h5>
-                                  <p>Some representative placeholder content for the first slide.</p>
-                                </div>
-                              </div>
-                          </div>
-                          <div><a class="carousel-control-prev" href="#carousel-1" role="button" data-slide="prev"><span class="carousel-control-prev-icon"></span><span class="sr-only">Previous</span></a><a class="carousel-control-next" href="#carousel-1" role="button"
-                                  data-slide="next"><span class="carousel-control-next-icon"></span><span class="sr-only">Next</span></a></div>
-                          <ol class="carousel-indicators">
-                              <li data-target="#carousel-1" data-slide-to="0" class="active"></li>
-                              <li data-target="#carousel-1" data-slide-to="1"></li>
-                              <li data-target="#carousel-1" data-slide-to="2"></li>
-                              <li data-target="#carousel-1" data-slide-to="3"></li>
-                          </ol>
-                      </div>
-                      </div>
-                  </div>
-              </div>
+        <section>
+          <div class="page-wrapper">
+          <div class="post-slider">
+      <h1 class="slider-title">Trending Posts</h1>
+      <i class="fas fa-chevron-left prev"></i>
+      <i class="fas fa-chevron-right next"></i>
+
+      <div class="post-wrapper">
+
+        <?php foreach ($posts as $post): ?>
+          <div class="post">
+            <img src="<?php echo BASE_URL . '/assets/images/' . $post['image']; ?>" alt="" class="slider-image">
+            <div class="post-info">
+              <h4><a href="blog-post.php?id=<?php echo $post['id']; ?>"><?php echo $post['title']; ?></a></h4>
+              <i class="far fa-user"> <?php echo $post['username']; ?></i>
+              &nbsp;
+              <i class="far fa-calendar"> <?php echo date('F j, Y', strtotime($post['created_at'])); ?></i>
+            </div>
           </div>
-      </section>
+        <?php endforeach; ?>
+
+
+      </div>
+
+    </div>
+          </div>
+        </section>
         <section class="clean-block about-us">
             <div class="container">
                 <div class="block-heading">
@@ -361,7 +332,11 @@ if (isset($_GET['t_id'])) {
     <script src="assets/js/smoothproducts.min.js"></script>
     <script src="assets/js/theme.js"></script>
     <script src="main.js"></script>
-    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+
+  <!-- Custom Script -->
+    <script src="assets/js/scripts.js"></script>
 </body>
 
 </html>
